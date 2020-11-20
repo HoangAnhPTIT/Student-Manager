@@ -1,10 +1,10 @@
 package com.hoanganh.repository;
 
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.CrudRepository;
 
 import com.hoanganh.entity.StudentEntity;
 
-public interface StudentRepository extends JpaRepository<StudentEntity, Long>{
+public interface StudentRepository extends CrudRepository<StudentEntity, Long>{
 	StudentEntity findOneByuserName(String username);
 	
 	

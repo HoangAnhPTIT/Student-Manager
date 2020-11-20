@@ -22,7 +22,7 @@ public class StudentService implements IStudentService {
 	@Override
 	public List<StudentDTO> findAll() {
 		List<StudentDTO> model = new ArrayList<>();
-		List<StudentEntity> studentEntity = studentReposity.findAll();
+		Iterable<StudentEntity> studentEntity = studentReposity.findAll();
 		for (StudentEntity item : studentEntity) {
 			StudentDTO studentDTO = modelMapper.map(item, StudentDTO.class);
 			model.add(studentDTO);
@@ -40,6 +40,18 @@ public class StudentService implements IStudentService {
 	@Override
 	public StudentDTO findOneByUsername(String username) {
 		StudentEntity student = studentReposity.findOneByuserName(username);
+		return modelMapper.map(student, StudentDTO.class);
+	}
+
+	@Override
+	public void update(StudentDTO student) {
+		StudentEntity studentEntity = modelMapper.map(student, StudentEntity.class);
+		studentReposity.save(studentEntity);
+	}
+
+	@Override
+	public StudentDTO findById(Long id) {
+		StudentEntity student = studentReposity.findOne(id);
 		return modelMapper.map(student, StudentDTO.class);
 	}
 

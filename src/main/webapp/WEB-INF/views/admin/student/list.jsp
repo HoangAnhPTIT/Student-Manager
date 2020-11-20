@@ -22,8 +22,8 @@
 				<div class="page-content">
 					<div class="row">
 						<div class="col-xs-12">
-							<c:if test="${not empty messageResponse}">
-								<div class="alert alert-${alert}">${messageResponse}</div>
+							<c:if test="${param.messageResponse!=null}">
+								<div class="alert alert-${param.alert}">${param.messageResponse}</div>
 							</c:if>
 							<div class="widget-box table-filter">
 								<div class="table-btn-controls">
@@ -32,7 +32,7 @@
 											<a flag="info"
 												class="dt-button buttons-colvis btn btn-white btn-primary btn-bold"
 												data-toggle="tooltip" title='Thêm bài viết'
-												href='<c:url value="/admin-new?type=edit"/>'> <span>
+												href='<c:url value="/student-admin?type=edit&id"/>'> <span>
 													<i class="fa fa-plus-circle bigger-110 purple"></i>
 											</span>
 											</a>
@@ -69,7 +69,7 @@
 														<td>${item.address}</td>
 														<td>${item.age}</td>
 														<td>${item.gender}</td>
-														<td><c:url var="editURL" value="/admin-new">
+														<td><c:url var="editURL" value="/student-admin">
 																<c:param name="type" value="edit" />
 																<c:param name="id" value="${item.id}" />
 															</c:url> <a class="btn btn-sm btn-primary btn-edit"

@@ -2,6 +2,7 @@ package com.hoanganh.API;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -15,8 +16,20 @@ public class StudentApi {
 	
 	
 	@PostMapping(value="/api/student")
-	public void updateStudent(@RequestBody StudentDTO student) {
+	public StudentDTO saveStudent(@RequestBody StudentDTO student) {
 		studentService.save(student);
+		return student;
+	}
+	
+	@PutMapping(value="api/student")
+	public StudentDTO updateStudent(@RequestBody StudentDTO student) {
+		StudentDTO studentDTO = studentService.findById(student.getId());
+		studentDTO.setFullName(student.getFullName());
+		studentDTO.setAddress(student.getAddress());
+		studentDTO.setAge(student.getAge());
+		studentDTO.setGender(student.getGender());
+		studentService.save(studentDTO);
+		return studentDTO;
 	}
 	
 }

@@ -7,6 +7,7 @@ public class StudentDTO extends AbstractDTO<StudentDTO>{
 	private String userName;
 	private String password;
 	private String gender;
+
 	public String getAddress() {
 		return address;
 	}
