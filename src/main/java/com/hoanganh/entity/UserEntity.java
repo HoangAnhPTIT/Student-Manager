@@ -3,13 +3,14 @@ package com.hoanganh.entity;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -44,11 +45,11 @@ public class UserEntity extends BaseEntity {
 		this.code = code;
 	}
 
-	@OneToOne(mappedBy = "user")
-	private StudentEntity student;
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.ALL)
+	private List<StudentEntity> students = new ArrayList<>();
 
-	@OneToOne(mappedBy = "user")
-	private TeacherEntity teacher;
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+	private List<TeacherEntity> teachers = new ArrayList<>();
 
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
@@ -102,20 +103,20 @@ public class UserEntity extends BaseEntity {
 		this.gender = gender;
 	}
 
-	public StudentEntity getStudent() {
-		return student;
+	public List<StudentEntity> getStudents() {
+		return students;
 	}
 
-	public void setStudent(StudentEntity student) {
-		this.student = student;
+	public void setStudents(List<StudentEntity> students) {
+		this.students = students;
 	}
 
-	public TeacherEntity getTeacher() {
-		return teacher;
+	public List<TeacherEntity> getTeachers() {
+		return teachers;
 	}
 
-	public void setTeacher(TeacherEntity teacher) {
-		this.teacher = teacher;
+	public void setTeachers(List<TeacherEntity> teachers) {
+		this.teachers = teachers;
 	}
 
 	public List<RoleEntity> getRoles() {
@@ -125,6 +126,5 @@ public class UserEntity extends BaseEntity {
 	public void setRoles(List<RoleEntity> roles) {
 		this.roles = roles;
 	}
-
 
 }

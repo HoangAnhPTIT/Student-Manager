@@ -9,15 +9,15 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "student")
-public class StudentEntity extends BaseEntity{
+public class StudentEntity extends BaseEntity {
 
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "user_id", referencedColumnName = "id")
+	@ManyToOne(cascade = CascadeType.MERGE)
+	@JoinColumn(name = "user_id")
 	private UserEntity user;
 
 	public UserEntity getUser() {

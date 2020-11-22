@@ -1,9 +1,11 @@
 package com.hoanganh.DTO;
 
-public class TeacherDTO extends UserDTO{
+public class TeacherDTO extends UserDTO {
 	private String subject;
 	private int experience;
 	private Long salary;
+	private Long user_id;
+
 	private UserDTO user;
 
 	public String getSubject() {
@@ -36,5 +38,13 @@ public class TeacherDTO extends UserDTO{
 
 	public void setUser(UserDTO user) {
 		this.user = user;
+	}
+
+	public Long getUser_id() {
+		return user_id;
+	}
+
+	public void setUser_id(Long user_id) {
+		this.user_id = user_id;
 	}
 }
