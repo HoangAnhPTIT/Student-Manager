@@ -45,7 +45,7 @@ public class UserEntity extends BaseEntity {
 		this.code = code;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.ALL)
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
 	private List<StudentEntity> students = new ArrayList<>();
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
@@ -60,6 +60,17 @@ public class UserEntity extends BaseEntity {
     	students.remove(student);
         student.setUser(null);
     }
+    
+    public void addTeacher(TeacherEntity teacher) {
+    	teachers.add(teacher);
+    	teacher.setUser(this);
+    }
+    
+    public void removeTeacher(TeacherEntity teacher) {
+    	teachers.remove(teacher);
+    	teacher.setUser(null);
+    }
+    
 	
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))

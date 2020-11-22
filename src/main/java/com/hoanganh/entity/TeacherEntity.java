@@ -24,7 +24,7 @@ public class TeacherEntity extends BaseEntity {
 	@Column(name = "salary")
 	private Long salary;
 	
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "user_id")
 	private UserEntity user;
 

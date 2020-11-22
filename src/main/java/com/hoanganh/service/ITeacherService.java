@@ -6,4 +6,6 @@ import com.hoanganh.DTO.TeacherDTO;
 
 public interface ITeacherService {
 	List<TeacherDTO> findByCodeLike(String code);
+	TeacherDTO findById(Long id);
+	void save(TeacherDTO teacher);
 }

@@ -7,5 +7,5 @@ import com.hoanganh.DTO.UserDTO;
 
 public interface IStudentService {
 	List<StudentDTO> findAll();
-
+	void save(StudentDTO student);
 }

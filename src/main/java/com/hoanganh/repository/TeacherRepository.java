@@ -7,4 +7,5 @@ import com.hoanganh.entity.UserEntity;
 
 public interface TeacherRepository extends JpaRepository<TeacherEntity, Long>{
 	TeacherEntity findByuser(UserEntity user);
+	TeacherEntity findByid(Long id);
 }

@@ -10,8 +10,9 @@ import com.hoanganh.entity.UserEntity;
 public interface IUserService {
 	List<UserDTO> findAll();
 	List<TeacherDTO> findTeacherByCodeLike(String code);
+	TeacherDTO findTeacherById(Long id);
 	List<StudentDTO> findStudentByCodeLike(String code);
+	StudentDTO findStudentById(Long id);
 	void save(UserDTO user);
-	void update(UserDTO user);
 	UserDTO findById(Long id);
 }
