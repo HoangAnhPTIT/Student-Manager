@@ -3,6 +3,7 @@ package com.hoanganh.entity;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -10,29 +11,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "teacher")
 public class TeacherEntity extends BaseEntity {
-	@Column(name = "fullname")
-	private String fullName;
-
-	@Column(name = "username")
-	private String userName;
-
-	@Column(name = "password")
-	private String password;
-
-	@Column(name = "address")
-	private String address;
-
-	@Column(name = "age")
-	private int age;
-
-	@Column(name = "gender")
-	private String gender;
-
 	@Column(name = "subject")
 	private String subject;
 
@@ -41,6 +25,18 @@ public class TeacherEntity extends BaseEntity {
 
 	@Column(name = "salary")
 	private Long salary;
+	
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "user_id", referencedColumnName = "id")
+	private UserEntity user;
+
+	public UserEntity getUser() {
+		return user;
+	}
+
+	public void setUser(UserEntity user) {
+		this.user = user;
+	}
 
 	@ManyToMany(mappedBy = "teachers")
 	private List<StudentEntity> students = new ArrayList<>();
@@ -52,54 +48,6 @@ public class TeacherEntity extends BaseEntity {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "exam_id")
 	private ExamEntity exam;
-
-	public String getFullName() {
-		return fullName;
-	}
-
-	public void setFullName(String fullName) {
-		this.fullName = fullName;
-	}
-
-	public String getUserName() {
-		return userName;
-	}
-
-	public void setUserName(String userName) {
-		this.userName = userName;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
-	public String getAddress() {
-		return address;
-	}
-
-	public void setAddress(String address) {
-		this.address = address;
-	}
-
-	public int getAge() {
-		return age;
-	}
-
-	public void setAge(int age) {
-		this.age = age;
-	}
-
-	public String getGender() {
-		return gender;
-	}
-
-	public void setGender(String gender) {
-		this.gender = gender;
-	}
 
 	public String getSubject() {
 		return subject;

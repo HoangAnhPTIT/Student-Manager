@@ -6,8 +6,4 @@ import com.hoanganh.DTO.StudentDTO;
 
 public interface IStudentService {
 	List<StudentDTO> findAll();
-	StudentDTO findOneByUsername(String username);
-	void save(StudentDTO student);
-	void update(StudentDTO student);
-	StudentDTO findById(Long id);
 }

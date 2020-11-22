@@ -18,7 +18,7 @@ public class RoleEntity extends BaseEntity{
 	private String name;
 	
 	@ManyToMany(mappedBy = "roles")
-	private List<StudentEntity> students = new ArrayList<>();
+	private List<UserEntity> users = new ArrayList<>();
 
 	public String getCode() {
 		return code;
@@ -36,13 +36,13 @@ public class RoleEntity extends BaseEntity{
 		this.name = name;
 	}
 
-	public List<StudentEntity> getStudents() {
-		return students;
+	public List<UserEntity> getUsers() {
+		return users;
 	}
 
-	public void setStudents(List<StudentEntity> students) {
-		this.students = students;
+	public void setUsers(List<UserEntity> users) {
+		this.users = users;
 	}
-	
+
 	
 }

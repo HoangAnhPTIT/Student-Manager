@@ -8,51 +8,29 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.hoanganh.DTO.StudentDTO;
+import com.hoanganh.DTO.UserDTO;
 import com.hoanganh.entity.StudentEntity;
 import com.hoanganh.repository.StudentRepository;
 import com.hoanganh.service.IStudentService;
 
 @Service
 public class StudentService implements IStudentService {
-
 	@Autowired
-	private StudentRepository studentReposity;
+	private StudentRepository studentRepository;
 
 	private ModelMapper modelMapper = new ModelMapper();
+
 	@Override
 	public List<StudentDTO> findAll() {
-		List<StudentDTO> model = new ArrayList<>();
-		Iterable<StudentEntity> studentEntity = studentReposity.findAll();
-		for (StudentEntity item : studentEntity) {
-			StudentDTO studentDTO = modelMapper.map(item, StudentDTO.class);
-			model.add(studentDTO);
+		List<StudentDTO> students = new ArrayList<>();
+		List<StudentEntity> studentEntities = studentRepository.findAll();
+		for (StudentEntity item : studentEntities) {
+			StudentDTO studentDTO = new StudentDTO();
+			studentDTO.setUser(modelMapper.map(item.getUser(), UserDTO.class));
+			students.add(studentDTO);
 		}
-
-		return model;
+		return students;
 	}
 
-	@Override
-	public void save(StudentDTO student) {
-		StudentEntity studentEntity = modelMapper.map(student, StudentEntity.class);
-		studentReposity.save(studentEntity);
-	}
-
-	@Override
-	public StudentDTO findOneByUsername(String username) {
-		StudentEntity student = studentReposity.findOneByuserName(username);
-		return modelMapper.map(student, StudentDTO.class);
-	}
-
-	@Override
-	public void update(StudentDTO student) {
-		StudentEntity studentEntity = modelMapper.map(student, StudentEntity.class);
-		studentReposity.save(studentEntity);
-	}
-
-	@Override
-	public StudentDTO findById(Long id) {
-		StudentEntity student = studentReposity.findOne(id);
-		return modelMapper.map(student, StudentDTO.class);
-	}
-
+	
 }

@@ -9,5 +9,6 @@
 		<class>com.hoanganh.entity.TeacherEntity</class>
 		<class>com.hoanganh.entity.SubjectEntity</class>
 		<class>com.hoanganh.entity.RoleEntity</class>
+		<class>com.hoanganh.entity.UserEntity</class>
 	</persistence-unit>
 </persistence>

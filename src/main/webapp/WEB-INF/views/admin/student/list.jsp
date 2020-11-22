@@ -31,14 +31,14 @@
 										<div class="dt-buttons btn-overlap btn-group">
 											<a flag="info"
 												class="dt-button buttons-colvis btn btn-white btn-primary btn-bold"
-												data-toggle="tooltip" title='Thêm bài viết'
+												data-toggle="tooltip" title='Thêm người dùng'
 												href='<c:url value="/student-admin?type=edit&id"/>'> <span>
 													<i class="fa fa-plus-circle bigger-110 purple"></i>
 											</span>
 											</a>
 											<button id="btnDelete" type="button"
 												class="dt-button buttons-html5 btn btn-white btn-primary btn-bold"
-												data-toggle="tooltip" title='Xóa bài viết'>
+												data-toggle="tooltip" title='Xóa người dùng'>
 												<span> <i class="fa fa-trash-o bigger-110 pink"></i>
 												</span>
 											</button>
@@ -57,11 +57,23 @@
 													<th>Địa chỉ</th>
 													<th>Tuổi</th>
 													<th>Giới tính</th>
+													<c:if test="${param.type=='teacher'}">
+														<th>Môn dạy</th>
+														<th>Kinh nghiệm</th>
+														<th>Mức lương</th>
+													</c:if>
 													<th>Thao tác</th>
+													
 												</tr>
 											</thead>
 											<tbody>
-												<c:forEach var="item" items="${model.listResult}">
+												<c:if test="${param.type=='student'}">
+													<c:set var="user" value="${model.listStudent}"/>
+												</c:if>
+												<c:if test="${param.type=='teacher'}">
+													<c:set var="user" value="${model.listTeacher}"/>
+												</c:if>
+												<c:forEach var="item" items="${user}">
 													<tr>
 														<td><input type="checkbox" id="checkbox_${item.id}"
 															value="${item.id}"></td>
@@ -69,6 +81,11 @@
 														<td>${item.address}</td>
 														<td>${item.age}</td>
 														<td>${item.gender}</td>
+														<c:if test="${param.type=='teacher'}">
+															<td>${item.subject}</td>
+															<td>${item.experience}</td>
+															<td>${item.salary}</td>
+														</c:if>
 														<td><c:url var="editURL" value="/student-admin">
 																<c:param name="type" value="edit" />
 																<c:param name="id" value="${item.id}" />

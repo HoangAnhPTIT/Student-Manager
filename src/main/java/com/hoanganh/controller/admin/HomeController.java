@@ -6,26 +6,30 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.hoanganh.DTO.StudentDTO;
-import com.hoanganh.service.IStudentService;
+import com.hoanganh.DTO.UserDTO;
+import com.hoanganh.service.IUserService;
 
-@Controller(value="adminController")
+@Controller(value = "adminController")
 public class HomeController {
+
 	@Autowired
-	private IStudentService studentService;
+	private IUserService userService;
+
 	
-	@RequestMapping(value="/quan-tri", method = RequestMethod.GET)
+	@RequestMapping(value = "/quan-tri", method = RequestMethod.GET)
 	public ModelAndView homePage() {
 		ModelAndView mav = new ModelAndView("/admin/home");
 		return mav;
 	}
-	
-	@RequestMapping(value="/quan-tri/list", method = RequestMethod.GET)
+
+	@RequestMapping(value = "/quan-tri/list", method = RequestMethod.GET)
 	public ModelAndView showStudent() {
 		ModelAndView mav = new ModelAndView("/admin/student/list");
-		StudentDTO student = new StudentDTO();
-		student.setListResult(studentService.findAll());
-		mav.addObject("model", student);
+		UserDTO user = new UserDTO();
+		user.setListStudent(userService.findStudentByCodeLike("student"));
+		user.setListTeacher(userService.findTeacherByCodeLike("teacher"));
+		
+		mav.addObject("model", user);
 		return mav;
 	}
 }
