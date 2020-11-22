@@ -2,6 +2,24 @@ package com.hoanganh.service.impl;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+
+import javax.persistence.EntityGraph;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityTransaction;
+import javax.persistence.FlushModeType;
+import javax.persistence.LockModeType;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+import javax.persistence.StoredProcedureQuery;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaDelete;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.CriteriaUpdate;
+import javax.persistence.metamodel.Metamodel;
+import javax.transaction.Transactional;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +37,7 @@ import com.hoanganh.repository.UserRepository;
 import com.hoanganh.service.IUserService;
 
 @Service
+@Transactional
 public class UserService implements IUserService{
 
 	@Autowired
@@ -27,7 +46,12 @@ public class UserService implements IUserService{
 	private UserRepository userRepository;
 	@Autowired
 	private StudentRepository studentRepository;
+	
 	private ModelMapper modelMapper = new ModelMapper();
+	
+	@PersistenceContext
+	EntityManager entityManager;
+	
 	@Override
 	public List<UserDTO> findAll() {
 		List<UserEntity> userEntity = userRepository.findAll();
@@ -65,14 +89,19 @@ public class UserService implements IUserService{
 	public void save(UserDTO user) {
 		UserEntity userEntity = modelMapper.map(user, UserEntity.class);
 		StudentEntity studentEntity = new StudentEntity();
-		studentEntity.setUser(userEntity);
-		studentRepository.save(studentEntity);
-		userRepository.save(userEntity);
+		userEntity.addStudent(studentEntity);
+		entityManager.persist(userEntity);
 	}
 	@Override
 	public UserDTO findById(Long id) {
 		UserEntity userEntity = userRepository.findByid(id);
 		return modelMapper.map(userEntity, UserDTO.class);
+	}
+	@Override
+	public void update(UserDTO user) {
+		UserEntity userEntity = modelMapper.map(user, UserEntity.class);
+		entityManager.merge(userEntity);
+		
 	}
 	
 }

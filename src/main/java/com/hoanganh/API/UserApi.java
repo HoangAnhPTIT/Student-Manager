@@ -29,7 +29,7 @@ public class UserApi {
 		userDTO.setCode("student");
 		userDTO.setFullName(user.getFullName());
 		userDTO.setAge(user.getAge());
-		userService.save(userDTO);
+		userService.update(userDTO);
 		return userDTO;
 		
 	}

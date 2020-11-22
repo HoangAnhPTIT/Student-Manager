@@ -12,5 +12,6 @@ public interface IUserService {
 	List<TeacherDTO> findTeacherByCodeLike(String code);
 	List<StudentDTO> findStudentByCodeLike(String code);
 	void save(UserDTO user);
+	void update(UserDTO user);
 	UserDTO findById(Long id);
 }

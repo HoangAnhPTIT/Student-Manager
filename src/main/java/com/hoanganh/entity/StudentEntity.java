@@ -16,7 +16,7 @@ import javax.persistence.Table;
 @Table(name = "student")
 public class StudentEntity extends BaseEntity {
 
-	@ManyToOne(cascade = CascadeType.MERGE)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "user_id")
 	private UserEntity user;
 

@@ -51,6 +51,16 @@ public class UserEntity extends BaseEntity {
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
 	private List<TeacherEntity> teachers = new ArrayList<>();
 
+	public void addStudent(StudentEntity student) {
+		students.add(student);
+		student.setUser(this);
+    }
+ 
+    public void removeStudent(StudentEntity student) {
+    	students.remove(student);
+        student.setUser(null);
+    }
+	
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
 	private List<RoleEntity> roles = new ArrayList<>();
