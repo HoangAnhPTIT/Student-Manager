@@ -6,12 +6,12 @@ import java.util.List;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 
-import com.hoanganh.DTO.MyStudent;
+import com.hoanganh.DTO.MyUser;
 
 public class SecurityUtil {
-	public static MyStudent getPrincipal() {
-		MyStudent myStudent = (MyStudent) (SecurityContextHolder.getContext()).getAuthentication().getPrincipal();
-		return myStudent;
+	public static MyUser getPrincipal() {
+		MyUser myUser = (MyUser) (SecurityContextHolder.getContext()).getAuthentication().getPrincipal();
+		return myUser;
 	}
 	
 	@SuppressWarnings("unchecked")

@@ -169,10 +169,10 @@
 						data : JSON.stringify(data),
 						dataType : 'json',
 						success : function(result) {
-							window.location.href = "${redirectUrl}?messageResponse=Insert_Success&alert=success";
+							window.location.href = "${redirectUrl}?type=student&messageResponse=Insert_Success&alert=success";
 						},
 						error : function(error) {
-							window.location.href = "${redirectUrl}?messageResponse=Insert_Failed&alert=danger";
+							window.location.href = "${redirectUrl}?type=student&messageResponse=Insert_Failed&alert=danger";
 						}
 					});
 		}
@@ -185,10 +185,10 @@
 						data : JSON.stringify(data),
 						dataType : 'json',
 						success : function(result) {
-							window.location.href = "${redirectUrl}?messageResponse=Update_Success&alert=success";
+							window.location.href = "${redirectUrl}?type=student&messageResponse=Update_Success&alert=success";
 						},
 						error : function(error) {
-							window.location.href = "${redirectUrl}?messageResponse=Update_Failed&alert=danger";
+							window.location.href = "${redirectUrl}?type=student&messageResponse=Update_Failed&alert=danger";
 						}
 					});
 		}

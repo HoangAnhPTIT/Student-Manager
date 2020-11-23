@@ -1,4 +1,6 @@
-
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ page import="com.hoanganh.util.SecurityUtil"%>
 <!-- Start menu -->
 <section id="mu-menu">
 	<nav class="navbar navbar-default" role="navigation">
@@ -15,7 +17,7 @@
 				<!-- LOGO -->
 				<!-- TEXT BASED LOGO -->
 				<a class="navbar-brand" href="index.html"><i
-					class="fa fa-university"></i><span>Varsity</span></a>
+					class="fa fa-university"></i><span>School</span></a>
 				<!-- IMG BASED LOGO  -->
 				<!-- <a class="navbar-brand" href="index.html"><img src="assets/img/logo.png" alt="logo"></a> -->
 			</div>
@@ -33,16 +35,17 @@
 					<li><a href="contact.html">Contact</a></li>
 
 
-					<li class="dropdown"><a href="#" class="dropdown-toggle"
-						data-toggle="dropdown">Ablout Student <span
-							class="fa fa-angle-down"></span></a>
-						<ul class="dropdown-menu" role="menu">
-							<li><a href="blog-archive.html">Detail</a></li>
-							<li><a href="blog-single.html">Logout</a></li>
-						</ul></li>
-					<li><a href="<c:url value='/dang-nhap'/>">Login</a></li>
-					<li><a href="#" id="mu-search-icon"><i
-							class="fa fa-search"></i></a></li>
+
+					<security:authorize access="isAnonymous()">
+						<li class="nav-item"><a class="nav-link" href="<c:url value='/dang-nhap'/>"">Đăng
+								nhập</a></li>
+						<li class="nav-item"><a class="nav-link" href="#">Đăng ký</a></li>
+					</security:authorize>
+					<security:authorize access="isAuthenticated()">
+						<li class="nav-item"><a class="nav-link" href="#"> <%=SecurityUtil.getPrincipal().getFullName()%></a></li>
+						<li class="nav-item"><a class="nav-link"
+							href="<c:url value='/thoat'/>">Thoát</a></li>
+					</security:authorize>
 				</ul>
 			</div>
 			<!--/.nav-collapse -->

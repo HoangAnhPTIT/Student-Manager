@@ -14,10 +14,10 @@
 						<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
 							<div class="mu-header-top-left">
 								<div class="mu-top-email">
-									<i class="fa fa-envelope"></i> <span>info@markups.io</span>
+									<i class="fa fa-envelope"></i> <span>caohoanganh2000@gmail.com</span>
 								</div>
 								<div class="mu-top-phone">
-									<i class="fa fa-phone"></i> <span>(568) 986 652</span>
+									<i class="fa fa-phone"></i> <span>0977558314</span>
 								</div>
 							</div>
 						</div>

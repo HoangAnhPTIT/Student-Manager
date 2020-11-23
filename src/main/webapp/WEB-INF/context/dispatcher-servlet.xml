@@ -22,7 +22,7 @@
 
 	<context:component-scan
 		base-package="com.hoanganh.controller, com.hoanganh.API" />
-	
+
 	<mvc:annotation-driven />
 
 	<bean
@@ -34,6 +34,7 @@
 
 	</bean>
 
-	<mvc:resources mapping="/template/**" location="/template/" />
+	<mvc:resources mapping="/template/**"
+		location="/template/" />
 
 </beans>

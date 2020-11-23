@@ -10,4 +10,5 @@ import com.hoanganh.entity.UserEntity;
 public interface UserRepository extends JpaRepository<UserEntity, Long> {
 	List<UserEntity> findBycodeLike(String code);
 	UserEntity findByid(Long id);
+	UserEntity findOneByuserName(String userName);
 }
