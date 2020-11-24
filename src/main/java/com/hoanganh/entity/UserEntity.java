@@ -45,10 +45,10 @@ public class UserEntity extends BaseEntity {
 		this.code = code;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user", cascade=CascadeType.ALL)
 	private List<StudentEntity> students = new ArrayList<>();
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user", cascade=CascadeType.ALL)
 	private List<TeacherEntity> teachers = new ArrayList<>();
 
 	public void addStudent(StudentEntity student) {

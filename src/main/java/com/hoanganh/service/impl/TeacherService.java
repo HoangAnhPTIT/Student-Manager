@@ -34,12 +34,6 @@ public class TeacherService implements ITeacherService {
 	private ModelMapper modelMapper = new ModelMapper();
 
 	@Override
-	public List<TeacherDTO> findByCodeLike(String code) {
-		List<UserEntity> userEntity = userRepository.findBycodeLike(code);
-		return null;
-	}
-
-	@Override
 	public void save(TeacherDTO teacher) {
 		UserEntity userEntity = new UserEntity();
 		TeacherEntity teacherEntity = new TeacherEntity();

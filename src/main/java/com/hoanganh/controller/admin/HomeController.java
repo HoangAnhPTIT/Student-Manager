@@ -1,6 +1,8 @@
 package com.hoanganh.controller.admin;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.web.bind.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,13 +30,23 @@ public class HomeController {
 	}
 
 	@RequestMapping(value = "/quan-tri/list", method = RequestMethod.GET)
-	public ModelAndView showStudent(@RequestParam String type) {
-		ModelAndView mav = new ModelAndView("/admin/student/list");
+	public ModelAndView showList(@RequestParam("type") String type, @RequestParam("page") int page,
+			@RequestParam("limit") int limit) {
+		ModelAndView mav = new ModelAndView("/admin/user/list");
 		UserDTO user = new UserDTO();
+		user.setLimit(limit);
+		user.setPage(page);
+
+		Pageable pageable = new PageRequest(page - 1 , limit);
+
 		if (type.equals("student")) {
-			user.setListStudent(userService.findStudentByCodeLike("student"));
-		} else if (type.equals("teacher")){
-			user.setListTeacher(userService.findTeacherByCodeLike("teacher"));
+			user.setListStudent(userService.findStudentByCodeLike("student", pageable));
+			user.setTotalItem(userService.countByCodeLike("student"));
+			user.setTotalPage((int) Math.ceil((double) user.getTotalItem() / user.getLimit()));
+		} else if (type.equals("teacher")) {
+			user.setListTeacher(userService.findTeacherByCodeLike("teacher", pageable));
+			user.setTotalItem(userService.countByCodeLike("teacher"));
+			user.setTotalPage((int) Math.ceil((double) user.getTotalItem() / user.getLimit()));
 		}
 		mav.addObject("model", user);
 		return mav;

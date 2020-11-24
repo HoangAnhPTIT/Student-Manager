@@ -20,26 +20,28 @@ import com.hoanganh.repository.StudentRepository;
 import com.hoanganh.repository.TeacherRepository;
 import com.hoanganh.repository.UserRepository;
 import com.hoanganh.service.IUserService;
-import com.hoanganh.service.impl.UserService;
 
-@Controller(value = "studentController")
-public class StudentController {
+@Controller(value = "teacherController")
+public class TeacherController {
+
+	@Autowired
+	private UserRepository userRepository;
 
 	@Autowired
 	private IUserService userService;
 
 	@Autowired
-	private UserRepository userRepository;
+	private TeacherRepository teacherRopository;
 
 	private ModelMapper modelMapper = new ModelMapper();
 
-	@RequestMapping(value = "/student-admin", method = RequestMethod.GET)
+	@RequestMapping(value = "/teacher-admin", method = RequestMethod.GET)
 	public ModelAndView homePage(@RequestParam String type, @RequestParam(required = false) Long id) {
 		if (type.equals("edit")) {
-			ModelAndView mav = new ModelAndView("/admin/user/editStudent");
+			ModelAndView mav = new ModelAndView("/admin/user/editTeacher");
 			if (id != null) {
-				StudentDTO student = userService.findStudentById(id);
-				mav.addObject("model", student);
+				TeacherDTO teacher = userService.findTeacherById(id);
+				mav.addObject("model", teacher);
 			}
 			return mav;
 		}

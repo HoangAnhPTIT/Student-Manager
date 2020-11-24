@@ -44,7 +44,7 @@
             <b class="arrow"></b>
             <ul class="submenu">
                 <li>
-                    <a href='<c:url value="/quan-tri/list?type=student"/>'>
+                    <a href='<c:url value="/quan-tri/list?type=student&page=1&limit=4"/>'>
                         <i class="menu-icon fa fa-caret-right"></i>
                         DS học sinh
                     </a>
@@ -53,7 +53,7 @@
             </ul>
             <ul class="submenu">
                 <li>
-                    <a href='<c:url value="/quan-tri/list?type=teacher"/>'>
+                    <a href='<c:url value="/quan-tri/list?type=teacher&page=1&limit=4"/>'>
                         <i class="menu-icon fa fa-caret-right"></i>
                         DS giáo viên
                     </a>

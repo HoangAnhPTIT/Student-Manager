@@ -47,7 +47,7 @@
 	
 	<dec:body/>
 
-	<%@ include file="/common/web/footer.jsp"%>
+<%-- 	<%@ include file="/common/web/footer.jsp"%> --%>
 
 
 	<!-- jQuery library -->

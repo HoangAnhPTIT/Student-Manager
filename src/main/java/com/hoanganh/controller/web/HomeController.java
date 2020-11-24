@@ -38,4 +38,10 @@ public class HomeController {
 		}
 		return new ModelAndView("redirect:/trang-chu");
 	}
+	@RequestMapping(value="/dang-ky-mon-hoc", method = RequestMethod.GET)
+	public ModelAndView registrationCourse() {
+		ModelAndView mav = new ModelAndView("/web/registration");
+		return mav;
+	}
+	
 }

@@ -16,6 +16,12 @@ public class UserDTO {
 	private List<StudentDTO> listStudent = new ArrayList<>();
 	private List<TeacherDTO> listTeacher = new ArrayList<>();
 
+	// Use for paging
+	private Integer page;
+	private Integer limit;
+	private Integer totalPage;
+	private Integer totalItem;
+
 	public String getCode() {
 		return code;
 	}
@@ -102,6 +108,38 @@ public class UserDTO {
 
 	public void setListTeacher(List<TeacherDTO> listTeacher) {
 		this.listTeacher = listTeacher;
+	}
+
+	public Integer getPage() {
+		return page;
+	}
+
+	public void setPage(Integer page) {
+		this.page = page;
+	}
+
+	public Integer getLimit() {
+		return limit;
+	}
+
+	public void setLimit(Integer limit) {
+		this.limit = limit;
+	}
+
+	public Integer getTotalPage() {
+		return totalPage;
+	}
+
+	public void setTotalPage(Integer totalPage) {
+		this.totalPage = totalPage;
+	}
+
+	public Integer getTotalItem() {
+		return totalItem;
+	}
+
+	public void setTotalItem(Integer totalItem) {
+		this.totalItem = totalItem;
 	}
 
 }

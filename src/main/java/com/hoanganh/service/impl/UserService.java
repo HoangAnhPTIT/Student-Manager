@@ -9,6 +9,7 @@ import javax.transaction.Transactional;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.hoanganh.DTO.StudentDTO;
@@ -50,8 +51,8 @@ public class UserService implements IUserService {
 	}
 
 	@Override
-	public List<TeacherDTO> findTeacherByCodeLike(String code) {
-		List<UserEntity> userEntity = userRepository.findBycodeLike(code);
+	public List<TeacherDTO> findTeacherByCodeLike(String code, Pageable pageable) {
+		List<UserEntity> userEntity = userRepository.findBycodeLike(code, pageable);
 		List<TeacherDTO> teachers = new ArrayList<>();
 		for (UserEntity item : userEntity) {
 			TeacherEntity teacherEntity = teacherRepository.findByuser(item);
@@ -65,8 +66,8 @@ public class UserService implements IUserService {
 	}
 
 	@Override
-	public List<StudentDTO> findStudentByCodeLike(String code) {
-		List<UserEntity> userEntity = userRepository.findBycodeLike(code);
+	public List<StudentDTO> findStudentByCodeLike(String code, Pageable pageable) {
+		List<UserEntity> userEntity = userRepository.findBycodeLike(code, pageable);
 		List<StudentDTO> students = new ArrayList<>();
 		for (UserEntity item : userEntity) {
 
@@ -114,5 +115,10 @@ public class UserService implements IUserService {
 		StudentDTO student = modelMapper.map(userEntity, StudentDTO.class);
 
 		return student;
+	}
+
+	@Override
+	public int countByCodeLike(String code) {
+		return userRepository.countBycodeLike(code);
 	}
 }

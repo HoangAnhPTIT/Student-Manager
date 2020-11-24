@@ -1,6 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <%@include file="/common/taglib.jsp"%>
-<c:url var="APIurl" value="/api/student" />
+<c:url var="APIurl" value="/api/teacher" />
 <c:url var="redirectUrl" value="quan-tri/list" />
 <html>
 
@@ -34,16 +34,10 @@
 						<form id="formSubmit">
 							<div class="form-group">
 								<label class="col-sm-3 control-label no-padding-right">Tên
-									học sinh</label>
+									giáo viên</label>
 								<div class="col-sm-9">
-									<c:if test="${not empty model.id}">
-										<input type="text" class="form-control" id="fullName"
-											name="fullName" value="${model.fullName}" />
-									</c:if>
-									<c:if test="${empty model.id}">
-										<input type="text" class="form-control" id="fullName"
-											name="fullName" value="" />
-									</c:if>
+									<input type="text" class="form-control" id="fullName"
+										name="fullName" value="${model.fullName}" />
 								</div>
 							</div>
 							<br /> <br />
@@ -72,62 +66,43 @@
 										name="gender" value="${model.gender}" />
 								</div>
 							</div>
-							<c:if test="${model.code=='teacher'}">
-								<br />
-								<br />
-								<div class="form-group">
-									<label class="col-sm-3 control-label no-padding-right">Mức lương</label>
-									<div class="col-sm-9">
-										<input type="text" class="form-control" id="salary"
-											name="salary" value="${teacher.salary}" />
-									</div>
+							<br /> <br />
+							<div class="form-group">
+								<label class="col-sm-3 control-label no-padding-right">Mức
+									lương</label>
+								<div class="col-sm-9">
+									<input type="text" class="form-control" id="salary"
+										name="salary" value="${teacher.salary}" />
 								</div>
-								<br />
-								<br />
-								<div class="form-group">
-									<label class="col-sm-3 control-label no-padding-right">Kinh nghiệm</label>
-									<div class="col-sm-9">
-										<input type="text" class="form-control" id="experience"
-											name="experience" value="${teacher.experience}" />
-									</div>
+							</div>
+							<br /> <br />
+							<div class="form-group">
+								<label class="col-sm-3 control-label no-padding-right">Kinh
+									nghiệm</label>
+								<div class="col-sm-9">
+									<input type="text" class="form-control" id="experience"
+										name="experience" value="${teacher.experience}" />
 								</div>
-								<br />
-								<br />
-								<div class="form-group">
-									<label class="col-sm-3 control-label no-padding-right">Môn dạy</label>
-									<div class="col-sm-9">
-										<input type="text" class="form-control" id="subject"
-											name="subject" value="${teacher.subject}" />
-									</div>
+							</div>
+							<br /> <br />
+							<div class="form-group">
+								<label class="col-sm-3 control-label no-padding-right">Môn
+									dạy</label>
+								<div class="col-sm-9">
+									<input type="text" class="form-control" id="subject"
+										name="subject" value="${teacher.subject}" />
 								</div>
-
-							</c:if>
+							</div>
 							<br /> <br /> <br /> <br />
 							<div class="form-group">
 								<div class="col-sm-12">
 									<c:if test="${not empty model.id}">
-										<c:if test="${model.code=='teacher'}">
-											<input type="button"
+										<input type="button"
 											class="btn btn-white btn-warning btn-bold"
 											value="Cập nhật giáo viên" id="btnAddOrUpdateNew" />
-										</c:if>
-										<c:if test="${model.code=='student'}">
-											<input type="button"
-											class="btn btn-white btn-warning btn-bold"
-											value="Cập nhật học sinh" id="btnAddOrUpdateNew" />
-										</c:if>
+
 									</c:if>
 									<c:if test="${empty model.id}">
-									<c:if test="${model.code=='teacher'}">
-											<input type="button"
-											class="btn btn-white btn-warning btn-bold"
-											value="Cập nhật giáo viên" id="btnAddOrUpdateNew" />
-										</c:if>
-										<c:if test="${model.code=='student'}">
-											<input type="button"
-											class="btn btn-white btn-warning btn-bold"
-											value="Cập nhật học sinh" id="btnAddOrUpdateNew" />
-										</c:if>
 										<input type="button"
 											class="btn btn-white btn-warning btn-bold"
 											value="Thêm người dùng" id="btnAddOrUpdateNew" />
@@ -135,6 +110,7 @@
 								</div>
 							</div>
 							<input type="hidden" value="${model.id}" id="id" name="id" />
+							<input type="hidden" name="code" value="teacher"/>
 						</form>
 					</div>
 				</div>
@@ -154,13 +130,13 @@
 			});
 			var id = $('#id').val();
 			if (id == "") {
-				addStudent(data);
+				addTeacher(data);
 			} else {
-				updateStudent(data);
+				updateTeacher(data);
 			}
 		});
 
-		function addStudent(data) {
+		function addTeacher(data) {
 			$
 					.ajax({
 						url : '${APIurl}',
@@ -169,14 +145,14 @@
 						data : JSON.stringify(data),
 						dataType : 'json',
 						success : function(result) {
-							window.location.href = "${redirectUrl}?type=student&messageResponse=Insert_Success&alert=success";
+							window.location.href = "${redirectUrl}?type=teacher&messageResponse=Insert_Success&alert=success";
 						},
 						error : function(error) {
-							window.location.href = "${redirectUrl}?type=student&messageResponse=Insert_Failed&alert=danger";
+							window.location.href = "${redirectUrl}?type=teacher&messageResponse=Insert_Failed&alert=danger";
 						}
 					});
 		}
-		function updateStudent(data) {
+		function updateTeacher(data) {
 			$
 					.ajax({
 						url : '${APIurl}',
@@ -185,10 +161,10 @@
 						data : JSON.stringify(data),
 						dataType : 'json',
 						success : function(result) {
-							window.location.href = "${redirectUrl}?type=student&messageResponse=Update_Success&alert=success";
+							window.location.href = "${redirectUrl}?type=teacher&messageResponse=Update_Success&alert=success";
 						},
 						error : function(error) {
-							window.location.href = "${redirectUrl}?type=student&messageResponse=Update_Failed&alert=danger";
+							window.location.href = "${redirectUrl}?type=teacher&messageResponse=Update_Failed&alert=danger";
 						}
 					});
 		}
